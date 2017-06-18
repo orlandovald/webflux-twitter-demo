@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Show me the tweets!</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <style>
+        ul {
+            list-style-type: none;
+            width: 500px;
+        }
+
+        li img {
+            float: left;
+            margin: 0 15px 0 0;
+        }
+
+        li p {
+            font: 200 12px/1.5 Georgia, Times New Roman, serif;
+        }
+
+        li {
+            padding: 10px;
+            overflow: auto;
+            list-style-position: inside;
+            border: 1px solid gray;
+            border-radius: 8px;
+            margin: 4px
+        }
+
+        li:hover {
+            background: #eee;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="jumbotron">
+        <h3>Show me the tweets!</h3>
+        <p>Charlotte Java User Group Spring 5 Webflux demo</p>
+    </div>
+    <div id="tweets-wrapper">
+        <div class="tweet">
+            <div class="row">
+                <ul id="tweet-list">
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var evtSource = new EventSource("http://localhost:8080/tweets");
+    var tweetList = document.getElementById("tweet-list");
+    evtSource.onmessage = function (event) {
+        var data = JSON.parse(event.data);
+        var newElement = document.createElement("li");
+        var newTweet = '<img class="img-thumbnail" src="' + data.user.profile_image_url + '" />';
+        newTweet += '<h3>' + data.user.name + ' @' + data.user.screen_name + '</h3>';
+        newTweet += '<p>' + data.text + '<br>';
+        newTweet += '<small>' + data.created_at + '</small></p>';
+        newElement.innerHTML = newTweet;
+        tweetList.insertBefore(newElement, tweetList.firstChild);
+    }
+</script>
+
+</body>
+</html>
