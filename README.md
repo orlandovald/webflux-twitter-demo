@@ -47,11 +47,15 @@ twitter.secret=<Your Twitter App's Access Token Secret>
 
 `mvn clean install`
 
-4. Below an example of how to run the program, every parameter will be used as a filter track, if no arguments are present a
- default filter will be used
+4. Below an example of how to run the program, every argument will be used as a filter track, if no arguments are present a
+ default filter will be used. Tracks can be hastags, twitter handler names or just simply some text.
  
-`java -jar webflux-twitter-app/target/webflux-twitter-app-0.0.1-SNAPSHOT.jar "#cltjug" "webflux"`
+`java -jar webflux-twitter-app/target/webflux-twitter-app-0.0.1-SNAPSHOT.jar "#cltjug" "webflux" "@reactor"`
 
 If everything goes well you will start seeing the Tweets in the console, you can curl the tweets enpoint at [http://localhost:8080/tweets](http://localhost:8080/tweets) 
 
 A thymeleaf template is included with enough Javascript to connect to the endpoint and display the tweets, you can open it at [http://localhost:8080/](http://localhost:8080/)
+
+Just remember the Tweets are real time and not historic, as soon as the application connects you will get only new Tweets real time, based on the filters passed,
+ you can try to use any trending hashtag to see a lot of activity or you can use your own and tweet to be able to see your own tweets arriving real time
+ 
