@@ -34,8 +34,8 @@
         </dependency>
         <dependency>
             <groupId>com.orlandovald</groupId>
-            <artifactId>orlando-twitter-spring-boot-starter</artifactId>
-            <version>1.0.0</version>
+            <artifactId>twitter-auth-spring-boot-starter</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>
